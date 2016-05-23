@@ -1,0 +1,28 @@
+<ion-navbar primary *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Notes</ion-title>
+</ion-navbar>
+
+
+<ion-content class="getting-started">
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let note of notes">
+    <ion-item>
+      <h2>{{note.doc.title}}</h2>
+      <p>{{note.doc.body}}</p>
+    </ion-item>
+    <ion-item-options>
+      <button danger (click)="remove(note.doc.title)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <button (click)="addNote()" secondary fab fab-fixed fab-right fab-bottom>
+    <ion-icon name="add"></ion-icon>
+  </button>
+</ion-content>
