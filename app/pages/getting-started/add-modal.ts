@@ -26,11 +26,12 @@ import {NotesProvider} from "../../providers/notes-provider/notes-provider";
   </ion-item>
 
 </ion-list>
-
+<div padding>
   <img *ngIf="picture !== null || undefined" src="{{picture}}">
+</div>
 
 <div padding>
-<button (click)="addNote(title.value, body.value)" block secondary>Add Note</button>
+  <button (click)="addNote(title.value, body.value)" block secondary>Add Note</button>
 </div>
     
   </ion-content>`,

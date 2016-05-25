@@ -88,9 +88,9 @@ export class GettingStartedPage {
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
-      saveToPhotoAlbum: true
+      targetWidth: 200,
+      targetHeight: 200,
+      saveToPhotoAlbum: false
     }
 
     Camera.getPicture(options).then((imageData) => {
