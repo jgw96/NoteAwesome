@@ -1,34 +1,34 @@
 import {Page, NavController, NavParams} from 'ionic-angular';
+import {OnInit} from "@angular/core";
 
+import {NotesProvider} from "../../providers/notes-provider/notes-provider";
 
 @Page({
-  templateUrl: 'build/pages/list/list.html'
+  templateUrl: 'build/pages/list/list.html',
+  providers: [NotesProvider]
 })
 export class ListPage {
-  selectedItem: any;
-  icons: string[];
-  items: Array<{title: string, note: string, icon: string}>;
+  
+  public notes: any[];
 
-  constructor(private nav: NavController, navParams: NavParams) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.selectedItem = navParams.get('item');
-
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
-    this.items = [];
-    for(let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
+  onPageDidEnter() {
+    this.notes = [];
+    this.notesProvider.getNotes().then((response) => {
+      response.rows.forEach((note) => {
+        console.log(note.doc.starred);
+        if (note.doc.starred === true) {
+          this.notes.push(note);
+        }
+      })
+      console.log(this.notes);
+    }).catch((err) => {
+      console.error(err);
+    })
   }
 
-  itemTapped(event, item) {
-    this.nav.push(ListPage, {
-      item: item
-    });
+  constructor(private notesProvider: NotesProvider) {
+
   }
+
+
 }

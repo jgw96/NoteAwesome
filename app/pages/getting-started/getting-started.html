@@ -3,6 +3,11 @@
     <ion-icon name="menu"></ion-icon>
   </button>
   <ion-title>Notes</ion-title>
+  <ion-buttons end>
+    <button (click)="picNote()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
 
 
@@ -10,15 +15,22 @@
 
   <ion-list>
     <ion-item-sliding *ngFor="let note of notes">
-    <ion-item>
-      <h2>{{note.doc.title}}</h2>
-      <p>{{note.doc.body}}</p>
-    </ion-item>
-    <ion-item-options>
-      <button danger (click)="remove(note.doc.title)">
+      <ion-item>
+        <h2 *ngIf="note.doc.title">{{note.doc.title}}</h2>
+        <p *ngIf="note.doc.title">{{note.doc.body}}</p>
+        <img *ngIf="note.doc.pic" src="{{note.doc.pic}}">
+      </ion-item>
+      <ion-item-options>
+        <button secondary (click)="edit(note.doc.title, note.doc.body)">
+        <ion-icon name="create"></ion-icon>
+      </button>
+        <button like (click)="starNote(note.doc.body)">
+        <ion-icon style="color: white;" name="star"></ion-icon>
+      </button>
+        <button danger (click)="remove(note.doc.body)">
         <ion-icon name="trash"></ion-icon>
       </button>
-    </ion-item-options>
+      </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 

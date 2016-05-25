@@ -1,11 +1,12 @@
 import {Page, ViewController, NavParams} from "ionic-angular";
+import {ViewChild} from "@angular/core";
 
 import {NotesProvider} from "../../providers/notes-provider/notes-provider";
 
 @Page({
   template: `
     <ion-navbar style="opacity: 1;" primary>
-    <ion-title>New Note</ion-title>
+    <ion-title>Edit Note</ion-title>
     <ion-buttons start>
     <button (click)="close()">
       <span primary showWhen="ios">Cancel</span>
@@ -18,32 +19,31 @@ import {NotesProvider} from "../../providers/notes-provider/notes-provider";
     <ion-list>
 
   <ion-item>
-    <ion-input #title type="text" placeholder="Title"></ion-input>
+    <ion-input #title type="text" [value]="firstTitle" placeholder="Title"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-input #body type="text" placeholder="Note"></ion-input>
+    <ion-input #body type="text" [value]="firstBody" placeholder="Note"></ion-input>
   </ion-item>
 
 </ion-list>
 
-  <img *ngIf="picture !== null || undefined" src="{{picture}}">
-
 <div padding>
-<button (click)="addNote(title.value, body.value)" block secondary>Add Note</button>
+<button (click)="addNote(title.value, body.value)" block secondary>Submit</button>
 </div>
     
   </ion-content>`,
   providers: [NotesProvider]
 })
-export class MyModal {
-
-  private picture: string;
+export class EditModal {
+  private firstTitle: string;
+  private firstBody: string;
+  public title: string;
+  public body: string;
 
   onPageDidEnter() {
-    if (this.params.get("picture")) {
-      this.picture = this.params.get("picture");
-    }
+    this.firstTitle = this.params.get("title");
+    this.firstBody = this.params.get("body");
   }
 
   constructor(private viewCtrl: ViewController, private notesProvider: NotesProvider, private params: NavParams) {
@@ -55,13 +55,8 @@ export class MyModal {
   }
 
   public addNote(title: string, body: string): void {
-    if (this.picture !== null || undefined) {
-      this.notesProvider.addPicNote(this.picture, title, body);
-      this.close();
-    }
-    else {
-      this.notesProvider.addNote(title, body);
-      this.close();
-    }
+    console.log(title, body);
+    this.notesProvider.editNote(title, body, this.firstBody);
+    this.close();
   }
 }

@@ -4,16 +4,19 @@ import {StatusBar} from 'ionic-native';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 
+PouchDB.debug.enable('*');
+
 
 @App({
   templateUrl: 'build/app.html',
-  config: {} // http://ionicframework.com/docs/v2/api/config/Config/
+  config: {
+  } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = GettingStartedPage;
-  pages: Array<{title: string, component: any}>
+  pages: Array<{ title: string, component: any }>
 
   constructor(private platform: Platform) {
     this.initializeApp();
@@ -31,6 +34,7 @@ class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+
     });
   }
 
@@ -39,4 +43,5 @@ class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
 }
