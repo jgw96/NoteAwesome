@@ -21,7 +21,7 @@
         <img *ngIf="note.doc.pic" src="{{note.doc.pic}}">
       </ion-item>
       <ion-item-options>
-        <button secondary (click)="edit(note.doc.title, note.doc.body)">
+        <button favorite (click)="edit(note.doc.title, note.doc.body)">
         <ion-icon name="create"></ion-icon>
       </button>
         <button like (click)="starNote(note.doc.body)">
