@@ -27,7 +27,7 @@ import {NotesProvider} from "../../providers/notes-provider/notes-provider";
 
 </ion-list>
 <div padding>
-  <img *ngIf="picture !== null || undefined" src="{{picture}}">
+  <img id="addPic" *ngIf="picture !== null || undefined" src="{{picture}}">
 </div>
 
 <div padding>
@@ -35,7 +35,14 @@ import {NotesProvider} from "../../providers/notes-provider/notes-provider";
 </div>
     
   </ion-content>`,
-  providers: [NotesProvider]
+  providers: [NotesProvider],
+  styles: [
+    `
+      #addPic {
+        width: 100%;
+      }
+    `
+  ]
 })
 export class MyModal {
 

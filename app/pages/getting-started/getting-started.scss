@@ -2,4 +2,13 @@
   ion-label {
     white-space: normal;
   }
+  
+  #addNoteButton {
+    z-index: 9999;
+  }
+  
+  #notePic {
+    width: 100%;
+    margin-top: 3%;
+  }
 }

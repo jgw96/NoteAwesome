@@ -15,10 +15,10 @@
 
   <ion-list>
     <ion-item-sliding *ngFor="let note of notes">
-      <ion-item>
+      <ion-item (click)="showSheet(note.doc.title, note.doc.body)" >
         <h2 *ngIf="note.doc.title">{{note.doc.title}}</h2>
         <p *ngIf="note.doc.title">{{note.doc.body}}</p>
-        <img *ngIf="note.doc.pic" src="{{note.doc.pic}}">
+        <img id="notePic" *ngIf="note.doc.pic" src="{{note.doc.pic}}">
       </ion-item>
       <ion-item-options>
         <button favorite (click)="edit(note.doc.title, note.doc.body)">
@@ -34,7 +34,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <button (click)="addNote()" secondary fab fab-fixed fab-right fab-bottom>
+  <button id="addNoteButton" (click)="addNote()" secondary fab fab-fixed fab-right fab-bottom>
     <ion-icon name="add"></ion-icon>
   </button>
 </ion-content>

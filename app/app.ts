@@ -6,25 +6,31 @@ import {ListPage} from './pages/list/list';
 
 PouchDB.debug.enable('*');
 
-
 @App({
   templateUrl: 'build/app.html',
   config: {
-  } // http://ionicframework.com/docs/v2/api/config/Config/
+  },
+  styles: [
+    `
+      #menuIcon {
+        margin-right: 3%;
+      }
+    `
+  ]
 })
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = GettingStartedPage;
-  pages: Array<{ title: string, component: any }>
+  pages: Array<{ title: string, icon: string, component: any }>
 
   constructor(private platform: Platform) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Notes', component: GettingStartedPage },
-      { title: 'Starred', component: ListPage }
+      { title: 'Notes', icon: "create", component: GettingStartedPage },
+      { title: 'Starred', icon: "star", component: ListPage }
     ];
 
   }

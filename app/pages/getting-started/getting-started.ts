@@ -1,5 +1,7 @@
-import {Page, Modal, NavController} from 'ionic-angular';
+import {Page, Modal, NavController, ActionSheet} from 'ionic-angular';
 import {Camera} from 'ionic-native';
+import {SocialSharing} from 'ionic-native';
+import {Calendar} from "ionic-native";
 
 import {NotesProvider} from "../../providers/notes-provider/notes-provider";
 import {MyModal} from "./add-modal";
@@ -51,10 +53,12 @@ export class GettingStartedPage {
           if (note.doc.starred === false) {
             this.notes.push(note);
           }
+          return false;
         })
         console.log(this.notes);
       }).catch((err) => {
         console.error(err);
+        return false;
       })
     })
   }
@@ -88,20 +92,54 @@ export class GettingStartedPage {
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 200,
-      targetHeight: 200,
+      targetWidth: 400,
+      targetHeight: 400,
       saveToPhotoAlbum: false
     }
 
     Camera.getPicture(options).then((imageData) => {
       let base64Image = "data:image/jpeg;base64," + imageData;
       console.log(base64Image);
-      
-      let modal = Modal.create(MyModal, {picture: base64Image});
+
+      let modal = Modal.create(MyModal, { picture: base64Image });
       this.nav.present(modal);
     }, (err) => {
       console.log(err);
     });
+  }
+
+  public showSheet(title: string, body: string): void {
+    let sheet = ActionSheet.create({
+      title: "Actions",
+      buttons: [
+        {
+          text: 'Share',
+          icon: "share",
+          handler: () => {
+            SocialSharing.share(body, title);
+          }
+        }, {
+          text: 'Calendar',
+          icon: "calendar",
+          handler: () => {
+            Calendar.createEventInteractively(title, null, body, new Date(), new Date()).then(() => {
+              console.log("event made");
+            }).catch((err) => {
+              console.log(err);
+            })
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          icon: "close",
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    })
+    
+    this.nav.present(sheet);
   }
 
 }
