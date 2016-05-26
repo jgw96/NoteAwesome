@@ -1,0 +1,37 @@
+<!--
+  Generated template for the VoiceNotesPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-navbar primary *navbar>
+  <button menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>Voice Memos</ion-title>
+</ion-navbar>
+
+<ion-content padding class="voice-notes">
+  
+  <ion-list>
+    <ion-item-sliding *ngFor="let note of notes">
+      <ion-item>
+        <h2 *ngIf="note.doc.title">{{note.doc.title}}</h2>
+        <audio src="{{note.doc.note}}"></audio>
+      </ion-item>
+      <ion-item-options>
+      <button like (click)="starNote(note.doc.note)">
+        <ion-icon style="color: white;" name="star"></ion-icon>
+      </button>
+      <button danger (click)="remove(note.doc.note)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+  <button id="addNoteButton" (click)="addNote()" secondary fab fab-fixed fab-right fab-bottom>
+    <ion-icon name="microphone"></ion-icon>
+  </button>
+</ion-content>

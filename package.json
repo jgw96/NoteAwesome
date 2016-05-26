@@ -35,7 +35,8 @@
     "ionic-plugin-keyboard",
     "cordova-plugin-camera",
     "cordova-plugin-x-socialsharing",
-    "cordova-plugin-calendar"
+    "cordova-plugin-calendar",
+    "cordova-plugin-media-capture"
   ],
   "cordovaPlatforms": [
     "ios",

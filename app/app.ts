@@ -3,6 +3,7 @@ import {App, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
+import {VoiceNotesPage} from "./pages/voice-notes/voice-notes";
 
 PouchDB.debug.enable('*');
 
@@ -14,6 +15,10 @@ PouchDB.debug.enable('*');
     `
       #menuIcon {
         margin-right: 3%;
+      }
+      
+      #menuToolbar {
+        min-height: 10rem;
       }
     `
   ]
@@ -30,6 +35,7 @@ class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Notes', icon: "create", component: GettingStartedPage },
+      { title: 'Voice Memos', icon: "microphone", component: VoiceNotesPage},
       { title: 'Starred', icon: "star", component: ListPage }
     ];
 

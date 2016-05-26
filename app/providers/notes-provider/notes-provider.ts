@@ -49,6 +49,23 @@ export class NotesProvider {
       return (err);
     })
   }
+  
+  public addAudioNote(title: string, voiceMemo: string): any {
+    let database = new PouchDB("notes");
+    
+    let note = {
+      "_id": voiceMemo,
+      "title": title,
+      "note": voiceMemo,
+      "starred": false,
+      "audio": true
+    }
+    database.put(note).then((data) => {
+      return data;
+    }).catch((err) => {
+      return err;
+    })
+  }
 
   public starNote(id: string): Promise<any> {
     let database = new PouchDB("notes");
@@ -100,23 +117,6 @@ export class NotesProvider {
     }).catch((err) => {
       console.log(err);
     })
-
-    /*return new Promise((resolve, reject) => {
-      database.get(firstBody).then((note) => {
-        console.log(note);
-        return database.put({
-          "title": title,
-          "body": body,
-          "starred": note.starred,
-          _id: note._id,
-          _rev: note._rev + 2,
-        })
-      }).then((response) => {
-        resolve(response);
-      }).catch((err) => {
-        reject(err);
-      })
-    })*/
   }
 
 }
