@@ -49,10 +49,10 @@ export class NotesProvider {
       return (err);
     })
   }
-  
+
   public addAudioNote(title: string, voiceMemo: string): any {
     let database = new PouchDB("notes");
-    
+
     let note = {
       "_id": voiceMemo,
       "title": title,
@@ -104,19 +104,20 @@ export class NotesProvider {
     })
   }
 
-  public editNote(title: string, body: string, firstBody: string) {
+  public editNote(title: string, body: string, firstBody: string): Promise<any> {
     let database = new PouchDB("notes");
-
-    this.removeNote(firstBody).then(() => {
-      return database.put({
-        "title": title,
-        "body": body,
-        "starred": false,
-        _id: body
+    return new Promise((resolve, reject) => {
+      this.removeNote(firstBody).then(() => {
+        resolve(database.put({
+          "title": title,
+          "body": body,
+          "starred": false,
+          _id: body
+        }));
+      }).catch((err) => {
+        reject(err);
       })
-    }).catch((err) => {
-      console.log(err);
-    })
+    });
   }
 
 }

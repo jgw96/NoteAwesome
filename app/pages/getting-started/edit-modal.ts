@@ -55,8 +55,10 @@ export class EditModal {
   }
 
   public addNote(title: string, body: string): void {
-    console.log(title, body);
-    this.notesProvider.editNote(title, body, this.firstBody);
-    this.close();
+    this.notesProvider.editNote(title, body, this.firstBody).then(() => {
+      this.close();
+    }).catch((err) => {
+      console.log(err);
+    })
   }
 }
